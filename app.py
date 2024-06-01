@@ -78,7 +78,7 @@ def check():
             private_key = load_private_key(private_key_pem.encode('utf-8'))
         except ValueError as e:
             flash(f"Invalid private key", "error")
-            return redirect(url_for('result'))
+            return redirect(url_for('check'))
 
         # 解密用戶選擇
         decrypted_president_choice = decrypt_data(private_key, encrypted_president_choice)
