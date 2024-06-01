@@ -36,6 +36,7 @@ def info():
         encrypted_president_choice = encrypt_data(public_key,president_choice)
         encrypted_vice_president_choice = encrypt_data(public_key,vice_president_choice)
         print(encrypted_president_choice, encrypted_vice_president_choice)
+        redis_handler.store_key(user_id, public_key_pem, private_key_pem)
         redis_handler.update_vote(user_id, encrypted_president_choice, encrypted_vice_president_choice)
         flash('投票成功', 'success')
    
@@ -51,8 +52,8 @@ def result():
         user_id = request.form['user_id']
         private_key_pem = request.form['private_key']
 
-        encrypted_president_choice_b64 = redis_handler.rds.hget(f'voter:{user_id}', 'president')
-        encrypted_vice_president_choice_b64 = redis_handler.rds.hget(f'voter:{user_id}', 'vice_president')
+        encrypted_president_choice_b64 = redis_handler.get_president_encrypted(user_id)
+        encrypted_vice_president_choice_b64 = redis_handler.get_vice_president_encrypted(user_id)
 
         if not encrypted_president_choice_b64 or not encrypted_vice_president_choice_b64:
             flash('沒有可顯示的結果', 'error')
@@ -76,8 +77,8 @@ def success():
     user_id = session.get('user_id')
     private_key_pem = redis_handler.get_private_key(user_id)
     
-    president_choice = redis_handler.get_president_choice(user_id)
-    vice_president_choice = redis_handler.get_vice_president_choice(user_id)
+    president_choice = redis_handler.get_president_text(user_id)
+    vice_president_choice = redis_handler.get_vice_president_text(user_id)
 
     return render_template('success.html',
                            private_key_pem=private_key_pem,

@@ -29,10 +29,16 @@ class RedisHandler():
     def get_private_key(self,user_id):
         return self.rds.hget(f'voter:{user_id}','private_key')
 
-    def get_president_choice(self,user_id):
+    def get_president_encrypted(self,user_id):
+        return self.rds.hget(f'voter:{user_id}','president')
+    
+    def get_vice_president_encrypted(self,user_id):
+        return self.rds.hget(f'voter:{user_id}','vice_president')
+    
+    def get_president_text(self,user_id):
         return self.rds.hget(f'voter:{user_id}','president_text')
 
-    def get_vice_president_choice(self,user_id):
+    def get_vice_president_text(self,user_id):
         return self.rds.hget(f'voter:{user_id}','vice_president_text')
     
     def store_key(self,user_id,public_key, private_key):
