@@ -73,32 +73,33 @@
             </div>
             <!-- 可以按照這種格式繼續添加更多候選人卡片 -->
         </div>
-        <div class="mt-6">
-            <label for="president" class="block text-white font-bold mb-2">你想選誰當會長:</label>
-            <select id="president" name="president" class="form-select block w-full mt-1 bg-gray-700 border border-gray-500 text-white">
-                <option value="candidate0">0.邱禹峰</option>
-                <option value="candidate1">1.周頎峰</option>
-                <option value="candidate2">2.王韋凱</option>
-                <option value="candidate3">3.楊承恩</option>
-                <option value="candidate4">4.陳士允</option>
-            </select>
-        </div>
-        <div class="mt-4">
-            <label for="vice_president" class="block text-white font-bold mb-2">你想選誰當副會長:</label>
-            <select id="vice_president" name="vice_president" class="form-select block w-full mt-1 bg-gray-700 border border-gray-500 text-white">
-                <option value="candidate0">0.邱禹峰</option>
-                <option value="candidate1">1.周頎峰</option>
-                <option value="candidate2">2.王韋凱</option>
-                <option value="candidate3">3.楊承恩</option>
-                <option value="candidate4">4.陳士允</option>
-            </select>
-        </div>
-        <div class="mt-6">
-            <button type="submit"
-                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                提交
-            </button>
-        </div>
+        <form method="POST" action="/info">
+            <div class="mt-6">
+                <label for="president" class="block text-white font-bold mb-2">你想選誰當會長:</label>
+                <select id="president" name="president" class="form-select block w-full mt-1 bg-gray-700 border border-gray-500 text-white">
+                    <option value="candidate0">0.邱禹峰</option>
+                    <option value="candidate1">1.周頎峰</option>
+                    <option value="candidate2">2.王韋凱</option>
+                    <option value="candidate3">3.楊承恩</option>
+                    <option value="candidate4">4.陳士允</option>
+                </select>
+            </div>
+            <div class="mt-4">
+                <label for="vice_president" class="block text-white font-bold mb-2">你想選誰當副會長:</label>
+                <select id="vice_president" name="vice_president" class="form-select block w-full mt-1 bg-gray-700 border border-gray-500 text-white">
+                    <option value="candidate0">0.邱禹峰</option>
+                    <option value="candidate1">1.周頎峰</option>
+                    <option value="candidate2">2.王韋凱</option>
+                    <option value="candidate3">3.楊承恩</option>
+                    <option value="candidate4">4.陳士允</option>
+                </select>
+            </div>
+            <div class="mt-6">
+                <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                    提交
+                </button>
+            </div>
+        </form>
 
 
     </div>
