@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, session
+from flask import Flask, render_template, request, redirect, url_for, flash, session, flash
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 import base64
@@ -26,7 +26,8 @@ def login():
         user_id = request.form['userid']
 
         if redis_handler.user_exists(user_id):
-            flash('用戶已存在', 'success')
+            flash('您已經投過票，不能重複投票！', 'danger')
+            return redirect(url_for('/'))
         else:
             redis_handler.set_db(user_name, user_id)
             flash('新用戶創建成功', 'success')
@@ -41,12 +42,12 @@ def info():
     if request.method == 'POST':
         president_choice = request.form['president']
         vice_president_choice = request.form['vice_president']
-        print(president_choice, vice_president_choice)
+        #print(president_choice, vice_president_choice)
         user_id = session.get('user_id')  # 從會話中獲取用戶 ID
         public_key,private_key,public_key_pem, private_key_pem = generate_rsa_key_pair()
         encrypted_president_choice = encrypt_data(public_key,president_choice)
         encrypted_vice_president_choice = encrypt_data(public_key,vice_president_choice)
-        print(encrypted_president_choice, encrypted_vice_president_choice)
+        #print(encrypted_president_choice, encrypted_vice_president_choice)
         redis_handler.store_key(user_id, public_key_pem, private_key_pem)
         redis_handler.update_vote(user_id, encrypted_president_choice, encrypted_vice_president_choice, president_choice, vice_president_choice)
         return redirect(url_for('success'))
@@ -76,7 +77,7 @@ def check():
         try:
             private_key = load_private_key(private_key_pem.encode('utf-8'))
         except ValueError as e:
-            flash(f"Invalid private key: {e}", "error")
+            flash(f"Invalid private key", "error")
             return redirect(url_for('result'))
 
         # 解密用戶選擇

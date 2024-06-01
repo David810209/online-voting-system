@@ -85,13 +85,15 @@
             </div>
         </form>        
         {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-            <div class="mt-4">
-            {% for category, message in messages %}
-                <div class="alert alert-{{ category }}">{{ message }}</div>
-            {% endfor %}
-            </div>
-        {% endif %}
+            {% if messages %}
+                <div class="mb-4">
+                    {% for category, message in messages %}
+                        <div class="p-4 mb-4 text-sm {{ 'bg-red-500 text-white' if category == 'danger' else 'bg-green-500 text-white' }} rounded-lg" role="alert">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
         {% endwith %}
     </div>
 </body>
