@@ -44,3 +44,4 @@ Werkzeug==3.0.1
 wget==3.2
 wsproto==1.2.0
 gunicorn
+redis
