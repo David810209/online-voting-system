@@ -48,10 +48,12 @@ class RedisHandler():
     def user_exists(self, user_id):
         return self.rds.exists(f'voter:{user_id}')
     
-    def update_vote(self, user_id, president_choice, vice_president_choice):
+    def update_vote(self, user_id, president_choice, vice_president_choice, president_text, vice_president_text):
         self.rds.hmset(f'voter:{user_id}', {
             'president': president_choice,
-            'vice_president': vice_president_choice
+            'vice_president': vice_president_choice,
+            "president_text": president_text,
+            "vice_president_text": vice_president_text
         })
     
         

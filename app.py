@@ -37,14 +37,14 @@ def info():
         encrypted_vice_president_choice = encrypt_data(public_key,vice_president_choice)
         print(encrypted_president_choice, encrypted_vice_president_choice)
         redis_handler.store_key(user_id, public_key_pem, private_key_pem)
-        redis_handler.update_vote(user_id, encrypted_president_choice, encrypted_vice_president_choice)
+        redis_handler.update_vote(user_id, encrypted_president_choice, encrypted_vice_president_choice, president_choice, vice_president_choice)
         flash('投票成功', 'success')
    
 
     return render_template('info.html')
 
-@app.route('/result', methods=['POST'])
-def result():
+@app.route('/check', methods=['GET', 'POST'])
+def check():
     decrypted_president_choice = None
     decrypted_vice_president_choice = None
 
@@ -57,7 +57,7 @@ def result():
 
         if not encrypted_president_choice_b64 or not encrypted_vice_president_choice_b64:
             flash('沒有可顯示的結果', 'error')
-            return redirect(url_for('result'))
+            return redirect(url_for('check'))
 
         encrypted_president_choice = base64.b64decode(encrypted_president_choice_b64)
         encrypted_vice_president_choice = base64.b64decode(encrypted_vice_president_choice_b64)
@@ -68,7 +68,7 @@ def result():
         decrypted_president_choice = decrypt_data(private_key, encrypted_president_choice)
         decrypted_vice_president_choice = decrypt_data(private_key, encrypted_vice_president_choice)
 
-    return render_template('result.html', 
+    return render_template('check.html', 
                            president_choice=decrypted_president_choice, 
                            vice_president_choice=decrypted_vice_president_choice)
     
