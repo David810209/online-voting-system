@@ -79,10 +79,12 @@
             </div>
             <!-- 可以按照這種格式繼續添加更多候選人卡片 -->
         </div>
+        <h1 class="text-3xl font-bold text-center mb-6">投票</h1>
         <form id="voteForm" method="POST" action="/info">
             <div class="mt-6">
                 <label for="president" class="block text-white font-bold mb-2">你想選誰當會長:</label>
-                <select id="president" name="president" class="form-select block w-full mt-1 bg-gray-700 border border-gray-500 text-white">
+                <select id="president" name="president" class="form-select block w-full mt-1 bg-gray-700 border border-gray-500 text-white" required>
+                    <option value="" disabled selected>選擇會長</option>
                     <option value="0.吳續元">0.吳續元</option>
                     <option value="1.蘇子宸">1.蘇子宸</option>
                     <option value="2.黃冠穎">2.黃冠穎</option>
@@ -92,7 +94,8 @@
             </div>
             <div class="mt-4">
                 <label for="vice_president" class="block text-white font-bold mb-2">你想選誰當副會長:</label>
-                <select id="vice_president" name="vice_president" class="form-select block w-full mt-1 bg-gray-700 border border-gray-500 text-white">
+                <select id="vice_president" name="vice_president" class="form-select block w-full mt-1 bg-gray-700 border border-gray-500 text-white" required>
+                    <option value="" disabled selected>選擇副會長</option>
                     <option value="0.吳續元">0.吳續元</option>
                     <option value="1.蘇子宸">1.蘇子宸</option>
                     <option value="2.黃冠穎">2.黃冠穎</option>
@@ -106,8 +109,25 @@
                 </button>
             </div>
         </form>
+        <script>
+            function showConfirmation() {
+                const president = document.getElementById('president').value;
+                const vice_president = document.getElementById('vice_president').value;
+
+                if (!president || !vice_president) {
+                    alert('請選擇會長和副會長！');
+                    return;
+                }
+
+                const confirmation = confirm(`你選擇的會長是：${president}\n你選擇的副會長是：${vice_president}\n\n確認提交嗎？`);
+                if (confirmation) {
+                    document.getElementById('voteForm').submit();
+                }
+            }
+        </script>
     </div>
     <div id="confirmationModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
+        
         <div class="bg-black p-6 rounded-lg">
             <h2 class="text-2xl font-bold mb-4">確認你的選擇</h2>
             <p class="mb-2"><strong>會長選擇:</strong> <span id="confirmPresident"></span></p>

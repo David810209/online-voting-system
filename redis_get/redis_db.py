@@ -56,5 +56,10 @@ class RedisHandler():
             "vice_president_text": vice_president_text
         })
     
+    def get_all_voters(self):
+        return self.rds.keys('voter:*')
+    
+    def get_voter_details(self, user_id):
+        return self.rds.hgetall(f'voter:{user_id}')
         
    
