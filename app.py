@@ -38,7 +38,7 @@ def info():
         print(encrypted_president_choice, encrypted_vice_president_choice)
         redis_handler.store_key(user_id, public_key_pem, private_key_pem)
         redis_handler.update_vote(user_id, encrypted_president_choice, encrypted_vice_president_choice, president_choice, vice_president_choice)
-        flash('投票成功', 'success')
+        return redirect(url_for('success'))
    
 
     return render_template('info.html')
