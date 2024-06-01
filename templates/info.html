@@ -45,36 +45,36 @@
             <div class="candidate-card rounded-lg p-4 shadow-lg flex items-center">
                 <img src="https://image.16pic.com/00/52/64/16pic_5264915_s.jpg" alt="候選人照片" class="candidate-img mr-4">
                 <div class="flex flex-col">
-                    <h2 class="text-xl font-semibold">0.邱禹峰</h2>
-                    <p class="text-sm">張三是一位有經驗的政治家，致力於改善公共交通系統。</p>
+                    <h2 class="text-xl font-semibold">0.吳續元</h2>
+                    <p class="text-sm">帥哥、客院冠軍</p>
                 </div>
             </div>
             <div class="candidate-card rounded-lg p-4 shadow-lg flex items-center">
                 <img src="https://image.16pic.com/00/52/64/16pic_5264915_s.jpg" alt="候選人照片" class="candidate-img mr-4">
                 <div class="flex flex-col">
-                    <h2 class="text-xl font-semibold">1.周頎峰</h2>
-                    <p class="text-sm">張三是一位有經驗的政治家，致力於改善公共交通系統。</p>
+                    <h2 class="text-xl font-semibold">1.蘇子宸</h2>
+                    <p class="text-sm">再一年。</p>
                 </div>
             </div>
             <div class="candidate-card rounded-lg p-4 shadow-lg flex items-center">
                 <img src="https://image.16pic.com/00/52/64/16pic_5264915_s.jpg" alt="候選人照片" class="candidate-img mr-4">
                 <div class="flex flex-col">
-                    <h2 class="text-xl font-semibold">2.王韋凱</h2>
-                    <p class="text-sm">張三是一位有經驗的政治家，致力於改善公共交通系統。</p>
+                    <h2 class="text-xl font-semibold">2.黃冠穎</h2>
+                    <p class="text-sm">大帥哥。</p>
                 </div>
             </div>
             <div class="candidate-card rounded-lg p-4 shadow-lg flex items-center">
                 <img src="https://image.16pic.com/00/52/64/16pic_5264915_s.jpg" alt="候選人照片" class="candidate-img mr-4">
                 <div class="flex flex-col">
-                    <h2 class="text-xl font-semibold">3.楊承恩</h2>
-                    <p class="text-sm">張三是一位有經驗的政治家，致力於改善公共交通系統。</p>
+                    <h2 class="text-xl font-semibold">3.賴瑞勳</h2>
+                    <p class="text-sm">ㄟ不是阿。</p>
                 </div>
             </div>
             <div class="candidate-card rounded-lg p-4 shadow-lg flex items-center">
                 <img src="https://image.16pic.com/00/52/64/16pic_5264915_s.jpg" alt="候選人照片" class="candidate-img mr-4">
                 <div class="flex flex-col">
-                    <h2 class="text-xl font-semibold">4.陳士允</h2>
-                    <p class="text-sm">張三是一位有經驗的政治家，致力於改善公共交通系統。</p>
+                    <h2 class="text-xl font-semibold">4.蕭玉琁</h2>
+                    <p class="text-sm">抽到我了。</p>
                 </div>
             </div>
             <!-- 可以按照這種格式繼續添加更多候選人卡片 -->
@@ -83,21 +83,21 @@
             <div class="mt-6">
                 <label for="president" class="block text-white font-bold mb-2">你想選誰當會長:</label>
                 <select id="president" name="president" class="form-select block w-full mt-1 bg-gray-700 border border-gray-500 text-white">
-                    <option value="0.邱禹峰">0.邱禹峰</option>
-                    <option value="1.周頎峰">1.周頎峰</option>
-                    <option value="2.王韋凱">2.王韋凱</option>
-                    <option value="3.楊承恩">3.楊承恩</option>
-                    <option value="4.陳士允">4.陳士允</option>
+                    <option value="0.吳續元">0.吳續元</option>
+                    <option value="1.蘇子宸">1.蘇子宸</option>
+                    <option value="2.黃冠穎">2.黃冠穎</option>
+                    <option value="3.賴瑞勳">3.賴瑞勳</option>
+                    <option value="4.蕭玉琁">4.蕭玉琁</option>
                 </select>
             </div>
             <div class="mt-4">
                 <label for="vice_president" class="block text-white font-bold mb-2">你想選誰當副會長:</label>
                 <select id="vice_president" name="vice_president" class="form-select block w-full mt-1 bg-gray-700 border border-gray-500 text-white">
-                    <option value="0.邱禹峰">0.邱禹峰</option>
-                    <option value="1.周頎峰">1.周頎峰</option>
-                    <option value="2.王韋凱">2.王韋凱</option>
-                    <option value="3.楊承恩">3.楊承恩</option>
-                    <option value="4.陳士允">4.陳士允</option>
+                    <option value="0.吳續元">0.吳續元</option>
+                    <option value="1.蘇子宸">1.蘇子宸</option>
+                    <option value="2.黃冠穎">2.黃冠穎</option>
+                    <option value="3.賴瑞勳">3.賴瑞勳</option>
+                    <option value="4.蕭玉琁">4.蕭玉琁</option>
                 </select>
             </div>
             <div class="mt-6">
@@ -105,6 +105,14 @@
                     提交
                 </button>
             </div>
+        </form>
+    </div>
+    <div class="mt-6 flex justify-end">
+        <form method="GET" action="/check">
+            <button type="submit"
+                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                用private key查詢結果
+            </button>
         </form>
     </div>
     <div id="confirmationModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
@@ -118,5 +126,6 @@
             </div>
         </div>
     </div>
+
 </body>
 </html>
