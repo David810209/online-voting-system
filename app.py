@@ -92,17 +92,17 @@ def check():
 @app.route('/success')
 def success():
     user_id = session.get('user_id')
-    private_key_pem = redis_handler.get_private_key(user_id)
     
     president_choice = redis_handler.get_president_text(user_id)
     vice_president_choice = redis_handler.get_vice_president_text(user_id)
 
     return render_template('success.html',
-                           private_key_pem=private_key_pem,
                            president_choice=president_choice,
                            vice_president_choice=vice_president_choice)
         
-        
+@app.route('/haha')
+def haha():
+    return render_template('haha.html')
 
 if __name__ == '__main__':
     app.run(debug=True)

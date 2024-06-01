@@ -23,17 +23,11 @@
             <h2 class="text-2xl font-bold mb-4">投票结果:</h2>
             <p class="mb-2"><strong>會長選擇:</strong> {{ president_choice }}</p>
             <p class="mb-2"><strong>副會長選擇:</strong> {{ vice_president_choice }}</p>
-            <h2 class="text-2xl font-bold mb-4">你的private key:</h2>
-            <pre class="bg-gray-900 p-4 rounded-lg text-white">{{ private_key_pem }}</pre>
-            <div class="mt-6 flex justify-end">
-                <form method="GET" action="/check">
-                    <button type="submit"
-                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                        用private key查詢結果
-                    </button>
-                </form>
-            </div>
+            <button class="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onclick="window.location.href='/haha'">
+                察看及時投票結果
+            </button>
         </div>
     </div>
+
 </body>
 </html>
