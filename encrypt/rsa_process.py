@@ -37,7 +37,11 @@ def encrypt_data(public_key, data):
     return base64.b64encode(encrypted_data).decode('utf-8')
 
 def load_private_key(pem_data):
-    return serialization.load_pem_private_key(pem_data, password=None)
+    try:
+        return serialization.load_pem_private_key(pem_data, password=None)
+    except ValueError as e:
+        print(f"Error loading private key: {e}")
+        raise
 
 def decrypt_data(private_key, encrypted_data):
     decrypted_data = private_key.decrypt(

@@ -62,7 +62,11 @@ def check():
         encrypted_president_choice = base64.b64decode(encrypted_president_choice_b64)
         encrypted_vice_president_choice = base64.b64decode(encrypted_vice_president_choice_b64)
 
-        private_key = load_private_key(private_key_pem.encode('utf-8'))
+        try:
+            private_key = load_private_key(private_key_pem.encode('utf-8'))
+        except ValueError as e:
+            flash(f"Invalid private key: {e}", "error")
+            return redirect(url_for('result'))
 
         # 解密用戶選擇
         decrypted_president_choice = decrypt_data(private_key, encrypted_president_choice)
