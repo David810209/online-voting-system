@@ -46,3 +46,4 @@ wsproto==1.2.0
 gunicorn
 redis
 cryptography
+flask_limiter

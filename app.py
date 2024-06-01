@@ -1,12 +1,23 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
 import base64
 from redis_get.redis_db import RedisHandler
 from encrypt.rsa_process import load_private_key, decrypt_data, encrypt_data,generate_rsa_key_pair
-from config import REDIS_HOST,REDIS_PORT,REDIS_PASSWORD
+from config import REDIS_HOST,REDIS_PORT,REDIS_PASSWORD, FLASK_SECRET_KEY
+
 app = Flask(__name__)
+
 redis_handler = RedisHandler(host=REDIS_HOST, port=REDIS_PORT, password=REDIS_PASSWORD)
 
-app.secret_key = 'supersecretkey'  # 用於會話加密，請更換為更安全的值
+    
+limiter = Limiter(
+    get_remote_address,
+    app=app,
+    default_limits=["1000 per day", "300 per hour"]
+)
+
+app.secret_key = FLASK_SECRET_KEY  # 用於會話加密，請更換為更安全的值
 
 @app.route('/', methods=['GET', 'POST'])
 def login():
