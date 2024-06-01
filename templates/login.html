@@ -53,37 +53,38 @@
     <div class="w-full max-w-md">
         <h1 class="text-3xl text-white font-bold text-center mb-4">2024南友會正副會長投票系統(測試)
         </h1> <!-- 大標題 -->
-        <form class="custom-form shadow-lg rounded px-8 pt-6 pb-8 mb-4" method="POST">
+        <form id="loginForm" method="POST" action="/" class="custom-form shadow-lg rounded px-8 pt-6 pb-8 mb-4">
             <div class="mb-4">
-                <label class="block text-white text-sm font-bold mb-2" for="username">
-                    姓名
-                </label>
-                <input
-                    class="shadow appearance-none  rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
-                    id="username" name="username" type="text" placeholder="ex: 楊子賝">
+                <label for="username" class="block text-white text-sm font-bold mb-2">姓名</label>
+                <input type="text" id="username" name="username" required
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline bg-gray-700 border-gray-500">
             </div>
-            <div class="mb-6">
-                <label class="block text-white text-sm font-bold mb-2" for="userid">
-                    學號
-                </label>
-                <input
-                    class="shadow appearance-none rounded w-full py-2 px-3 text-white mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                    id="userid" name="userid" type="text" placeholder="ex: 111550076">
+            <div class="mb-4">
+                <label for="userid" class="block text-white text-sm font-bold mb-2">學號</label>
+                <input type="text" id="userid" name="userid" required
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline bg-gray-700 border-gray-500">
             </div>
             <div class="mb-6">
                 <label class="inline-flex items-center">
-                    <input type="checkbox" class="form-checkbox text-indigo-600">
+                    <input type="checkbox" class="form-checkbox text-indigo-600" name="member_check">
                     <span class="ml-2 text-gray-200">我是南友16級成員</span>
                 </label>
             </div>
             <div class="flex items-center justify-between">
-                <button
-                    class="bg-gray-700 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                    type="submit">
+                <button id="submitButton" type="submit" 
+                    class="bg-gray-700 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
                     登入
                 </button>
             </div>
-        </form>        
+        </form>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const messages = {{ get_flashed_messages(with_categories=true)|tojson }};
+                if (messages.some(([category, message]) => category === 'danger')) {
+                    document.getElementById('submitButton').disabled = true;
+                }
+            });
+        </script>  
         {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
                 <div class="mb-4">
