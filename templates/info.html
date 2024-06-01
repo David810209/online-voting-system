@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>候選人資訊</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #1a1a1a;
+            /* 暗色背景 */
+            color: #ffffff;
+            /* 白色文字 */
+        }
+
+        .candidate-card {
+            background-color: #2a2a2a;
+            /* 暗灰色背景 */
+            border: 1px solid #ffffff;
+            /* 白色邊框 */
+        }
+
+        .candidate-img {
+            width: 100px;
+            /* 固定圖片寬度 */
+            height: 100px;
+            /* 固定圖片高度 */
+            object-fit: cover;
+            /* 確保圖片覆蓋整個元素，不變形 */
+        }
+    </style>
+</head>
+
+<body class="flex items-center justify-center min-h-screen">
+    <div class="w-full max-w-4xl p-5">
+        <h1 class="text-3xl font-bold text-center mb-6">候選人資訊</h1>
+        <div class="flex flex-col space-y-4">
+            <div class="candidate-card rounded-lg p-4 shadow-lg flex items-center">
+                <img src="https://image.16pic.com/00/52/64/16pic_5264915_s.jpg" alt="候選人照片" class="candidate-img mr-4">
+                <div class="flex flex-col">
+                    <h2 class="text-xl font-semibold">1. 張三</h2>
+                    <p class="text-sm">張三是一位有經驗的政治家，致力於改善公共交通系統。</p>
+                </div>
+            </div>
+            <div class="candidate-card rounded-lg p-4 shadow-lg flex items-center">
+                <img src="https://image.16pic.com/00/52/64/16pic_5264915_s.jpg" alt="候選人照片" class="candidate-img mr-4">
+                <div class="flex flex-col">
+                    <h2 class="text-xl font-semibold">1. 張三</h2>
+                    <p class="text-sm">張三是一位有經驗的政治家，致力於改善公共交通系統。</p>
+                </div>
+            </div>
+            <div class="candidate-card rounded-lg p-4 shadow-lg flex items-center">
+                <img src="https://image.16pic.com/00/52/64/16pic_5264915_s.jpg" alt="候選人照片" class="candidate-img mr-4">
+                <div class="flex flex-col">
+                    <h2 class="text-xl font-semibold">1. 張三</h2>
+                    <p class="text-sm">張三是一位有經驗的政治家，致力於改善公共交通系統。</p>
+                </div>
+            </div>
+            <div class="candidate-card rounded-lg p-4 shadow-lg flex items-center">
+                <img src="https://image.16pic.com/00/52/64/16pic_5264915_s.jpg" alt="候選人照片" class="candidate-img mr-4">
+                <div class="flex flex-col">
+                    <h2 class="text-xl font-semibold">1. 張三</h2>
+                    <p class="text-sm">張三是一位有經驗的政治家，致力於改善公共交通系統。</p>
+                </div>
+            </div>
+            <div class="candidate-card rounded-lg p-4 shadow-lg flex items-center">
+                <img src="https://image.16pic.com/00/52/64/16pic_5264915_s.jpg" alt="候選人照片" class="candidate-img mr-4">
+                <div class="flex flex-col">
+                    <h2 class="text-xl font-semibold">1. 張三</h2>
+                    <p class="text-sm">張三是一位有經驗的政治家，致力於改善公共交通系統。</p>
+                </div>
+            </div>
+            <!-- 可以按照這種格式繼續添加更多候選人卡片 -->
+        </div>
+        <div class="mt-6">
+            <label for="president" class="block text-white font-bold mb-2">你想選誰當會長:</label>
+            <select id="president" name="president"
+                class="form-select block w-full mt-1 bg-gray-700 border border-gray-500 text-white">
+                <option value="candidate1">候選人 1</option>
+                <option value="candidate2">候選人 2</option>
+                <option value="candidate3">候選人 3</option>
+                <option value="candidate4">候選人 4</option>
+                <option value="candidate5">候選人 5</option>
+            </select>
+        </div>
+
+        <div class="mt-4">
+            <label for="vice_president" class="block text-white font-bold mb-2">你想選誰當副會長:</label>
+            <select id="vice_president" name="vice_president"
+                class="form-select block w-full mt-1 bg-gray-700 border border-gray-500 text-white">
+                <option value="candidate1">候選人 1</option>
+                <option value="candidate2">候選人 2</option>
+                <option value="candidate3">候選人 3</option>
+                <option value="candidate4">候選人 4</option>
+                <option value="candidate5">候選人 5</option>
+            </select>
+        </div>
+        <div class="mt-6">
+            <button type="submit"
+                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                提交
+            </button>
+        </div>
+
+
+    </div>
+</body>
+
+</html>

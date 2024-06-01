@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>投票系統登入</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        /* 自定義樣式 */
+        body {
+            background-color: #16151d;
+            /* 暗灰色背景，稍微亮一點 */
+        }
+
+        .custom-form {
+            background-color: #16151d;
+            /* 設置表單背景同頁面背景色 */
+            border: 1px solid #ffffff;
+            /* 使用更細的白色邊框 */
+        }
+
+        input[type="text"],
+        input[type="id"],
+        button {
+            background-color: #333333;
+            /* 輸入框使用深灰色背景 */
+            color: #ffffff;
+            /* 白色文字 */
+        }
+
+        input[type="text"],
+        input[type="id"] {
+            background-color: #3a3a3a;
+            /* 名字欄位使用近似的灰色背景 */
+        }
+
+        input:focus,
+        button:focus {
+            outline: none;
+            border-color: #555555;
+            /* 獲得焦點時的邊框顏色 */
+        }
+
+        input::placeholder {
+            color: #cccccc;
+            /* 占位符文字顏色 */
+        }
+    </style>
+</head>
+
+<body class="flex items-center justify-center h-screen">
+    <div class="w-full max-w-md">
+        <h1 class="text-3xl text-white font-bold text-center mb-4">2024南友會正副會長投票系統
+        </h1> <!-- 大標題 -->
+        <form class="custom-form shadow-lg rounded px-8 pt-6 pb-8 mb-4">
+            <div class="mb-4">
+                <label class="block text-white text-sm font-bold mb-2" for="username">
+                    姓名
+                </label>
+                <input
+                    class="shadow appearance-none  rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
+                    id="username" type="text" placeholder="ex: 楊子賝">
+            </div>
+            <div class="mb-6">
+                <label class="block text-white text-sm font-bold mb-2" for="id">
+                    學號
+                </label>
+                <input
+                    class="shadow appearance-none rounded w-full py-2 px-3 text-white mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                    id="id" type="id" placeholder="ex: 111550076">
+            </div>
+            <div class="mb-6">
+                <label class="inline-flex items-center">
+                    <input type="checkbox" class="form-checkbox text-indigo-600">
+                    <span class="ml-2 text-gray-200">我是南友16級成員</span>
+                </label>
+            </div>
+            <div class="flex items-center justify-between">
+                <button
+                    class="bg-gray-700 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                    type="button">
+                    登入
+                </button>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>
