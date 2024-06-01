@@ -45,3 +45,4 @@ wget==3.2
 wsproto==1.2.0
 gunicorn
 redis
+cryptography
