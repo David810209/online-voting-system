@@ -55,3 +55,63 @@
 </div>
 </body>
 </html>
+
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>候選人資訊</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #16151d; /* 暗色背景 */
+            color: #ffffff; /* 白色文字 */
+        }
+        .candidate-card {
+            background-color: #2a2a2a; /* 暗灰色背景 */
+            border: 1px solid #ffffff; /* 白色邊框 */
+            overflow: hidden; /* 防止內容溢出 */
+        }
+        .candidate-img {
+            width: 100px; /* 固定圖片寬度 */
+            height: 100px; /* 固定圖片高度 */
+            object-fit: cover; /* 確保圖片覆蓋整個元素，不變形 */
+        }
+        .policy {
+            background-color: #333333; /* 更深的背景色為政見區塊 */
+            padding: 10px; /* 內距 */
+            margin-top: 10px; /* 上邊距 */
+            border-radius: 5px; /* 圓角 */
+            font-size: 0.875rem; /* 文字大小 */
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen">
+    <div class="w-full max-w-4xl p-5">
+        <h1 class="text-3xl font-bold text-center mb-6">候選人資訊</h1>
+        <div class="flex flex-col space-y-4">
+            <!-- 候選人卡片 -->
+            <div class="candidate-card rounded-lg p-4 shadow-lg flex flex-col">
+                <!-- 候選人信息 -->
+                <div class="flex items-center">
+                    <img src="https://github.com/David810209/online-voting-system/blob/main/img/4_chen.jpg?raw=true" alt="候選人照片" class="candidate-img mr-4">
+                    <div class="flex flex-col">
+                        <h2 class="text-xl font-semibold">4.陳士允</h2>
+                    </div>
+                </div>
+                <!-- 政見區塊 -->
+                <div class="policy">
+                    <h1>自我介紹</h1>
+        <p>大家好，我是南友會16級會長4號候選人陳士允。我直接複製格式。6🤙🏿。
+            1.屁眼
+              屁眼</p>
+                </div>
+            </div>
+            <!-- 更多候選人卡片可以這樣增加 -->
+        </div>
+    </div>
+</body>
+</html>
+
+

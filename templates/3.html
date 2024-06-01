@@ -1,51 +1,50 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-TW">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>個人簡介頁面</title>
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        background-color: #f4f4f4;
-    }
-    .profile-card {
-        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        background: white;
-        padding: 20px;
-        max-width: 300px;
-        text-align: center;
-        border-radius: 10px;
-    }
-    .profile-img {
-        width: 100px;
-        height: 100px;
-        border-radius: 50%;
-        margin: 0 auto 20px;
-    }
-    .name {
-        font-size: 20px;
-        font-weight: bold;
-        margin-bottom: 10px;
-    }
-    .description {
-        font-size: 16px;
-        color: #333;
-    }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>候選人資訊</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #16151d; /* 暗色背景 */
+            color: #ffffff; /* 白色文字 */
+        }
+        .candidate-card {
+            background-color: #2a2a2a; /* 暗灰色背景 */
+            border: 1px solid #ffffff; /* 白色邊框 */
+            overflow: hidden; /* 防止內容溢出 */
+        }
+        .candidate-img {
+            width: 100px; /* 固定圖片寬度 */
+            height: 100px; /* 固定圖片高度 */
+            object-fit: cover; /* 確保圖片覆蓋整個元素，不變形 */
+        }
+        .policy {
+            background-color: #333333; /* 更深的背景色為政見區塊 */
+            padding: 10px; /* 內距 */
+            margin-top: 10px; /* 上邊距 */
+            border-radius: 5px; /* 圓角 */
+            font-size: 0.875rem; /* 文字大小 */
+        }
+    </style>
 </head>
-<body>
-<div class="profile-card">
-    <img src="https://github.com/David810209/online-voting-system/blob/main/img/3_yang.jpg?raw=true" alt="Profile Image" class="profile-img">
-    <div class="name">3.楊承恩</div>
-    <p class="description">
-        <h1>自我介紹</h1>
+<body class="flex items-center justify-center min-h-screen">
+    <div class="w-full max-w-4xl p-5">
+        <h1 class="text-3xl font-bold text-center mb-6">候選人資訊</h1>
+        <div class="flex flex-col space-y-4">
+            <!-- 候選人卡片 -->
+            <div class="candidate-card rounded-lg p-4 shadow-lg flex flex-col">
+                <!-- 候選人信息 -->
+                <div class="flex items-center">
+                    <img src="https://github.com/David810209/online-voting-system/blob/main/img/3_yang.jpg?raw=true" alt="候選人照片" class="candidate-img mr-4">
+                    <div class="flex flex-col">
+                        <h2 class="text-xl font-semibold">3.楊承恩</h2>
+                    </div>
+                </div>
+                <!-- 政見區塊 -->
+                <div class="policy">
+                    <h1>自我介紹</h1>
         <h1>大家好，我是南友會16級會長3號候選人楊承恩。</h1>
         <p>打著一個👟咖身分莫名其妙參選，希望讓17的學弟妹在新竹能夠有個像家的地方，大家一起交朋友一起瘋，讓大家對南友有歸屬感</p>
         <h2>1.南夜</h2>
@@ -67,7 +66,12 @@
         <p>如題，壯大南友會打倒北友🍑友中友雄友</p>
         <h1> 總結 </h1>
         <p>以上是我的政見，看起來非常簡潔，但不管怎樣還是希望大家能夠在南友會交到很多朋友，就像我一樣雖然是孤兒，但還是對南友有最深的歸屬感，希望把這份溫暖傳給下一屆學弟妹，讓他們愛上南友，成為南友的一份子。㊗️期末歐趴（但我微積分看起來要寄了）</p>
-    </p>
-</div>
+                </div>
+            </div>
+            <!-- 更多候選人卡片可以這樣增加 -->
+        </div>
+    </div>
 </body>
 </html>
+
+

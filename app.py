@@ -20,7 +20,11 @@ limiter = Limiter(
 
 app.secret_key = FLASK_SECRET_KEY  # 用於會話加密，請更換為更安全的值
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/')
+def index():
+    return redirect(url_for('/login'))
+
+@app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
         user_name = request.form['username']
@@ -28,7 +32,7 @@ def login():
 
         if redis_handler.user_exists(user_id):
             flash('您已經投過票，不能重複投票！', 'danger')
-            return redirect(url_for('/'))
+            return redirect(url_for('/login'))
         else:
             redis_handler.set_db(user_name, user_id)
             flash('新用戶創建成功', 'success')
@@ -108,8 +112,8 @@ def haha():
 def zero():
     return render_template('0.html')
 
-@app.route('/one')
-def one():
+@app.route('/high')
+def high():
     return render_template('1.html')
 
 @app.route('/two')
