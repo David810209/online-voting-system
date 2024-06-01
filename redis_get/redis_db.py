@@ -26,7 +26,9 @@ class RedisHandler():
         return self.rds.exists(f'voter:{user_id}')
     
     def update_private_key(self, user_id, president_choice, vice_president_choice):
-        self.rds.hset(f'voter:{user_id}', 'president_private_key', president_choice,
-                      'vice_president_private_key', vice_president_choice)
+        self.rds.hmset(f'voter:{user_id}', {
+            'president_private_key': president_choice,
+            'vice_president_private_key': vice_president_choice
+        })
         
    
