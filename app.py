@@ -104,5 +104,26 @@ def success():
 def haha():
     return render_template('haha.html')
 
+@app.route('/zero')
+def zero():
+    return render_template('0.html')
+
+@app.route('/one')
+def one():
+    return render_template('1.html')
+
+@app.route('/two')
+def two():
+    return render_template('2.html')
+
+@app.route('/three')
+def three():
+    return render_template('3.html')
+
+@app.route('/four')
+def four():
+    return render_template('4.html')
+
+
 if __name__ == '__main__':
     app.run(debug=True)
