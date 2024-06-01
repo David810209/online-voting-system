@@ -22,7 +22,7 @@ app.secret_key = FLASK_SECRET_KEY  # 用於會話加密，請更換為更安全�
 
 @app.route('/')
 def index():
-    return redirect(url_for('/login'))
+    return redirect(url_for('login'))
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -32,7 +32,7 @@ def login():
 
         if redis_handler.user_exists(user_id):
             flash('您已經投過票，不能重複投票！', 'danger')
-            return redirect(url_for('/login'))
+            return redirect(url_for('login'))
         else:
             redis_handler.set_db(user_name, user_id)
             flash('新用戶創建成功', 'success')
