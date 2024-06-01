@@ -53,14 +53,14 @@
     <div class="w-full max-w-md">
         <h1 class="text-3xl text-white font-bold text-center mb-4">2024南友會正副會長投票系統
         </h1> <!-- 大標題 -->
-        <form class="custom-form shadow-lg rounded px-8 pt-6 pb-8 mb-4">
+        <form class="custom-form shadow-lg rounded px-8 pt-6 pb-8 mb-4" method="POST">
             <div class="mb-4">
                 <label class="block text-white text-sm font-bold mb-2" for="username">
                     姓名
                 </label>
                 <input
                     class="shadow appearance-none  rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
-                    id="username" type="text" placeholder="ex: 楊子賝">
+                    id="username" name="username" type="text" placeholder="ex: 楊子賝">
             </div>
             <div class="mb-6">
                 <label class="block text-white text-sm font-bold mb-2" for="userid">
@@ -68,7 +68,7 @@
                 </label>
                 <input
                     class="shadow appearance-none rounded w-full py-2 px-3 text-white mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                    id="userid" type="userid" placeholder="ex: 111550076">
+                    id="userid" name="userid" type="text" placeholder="ex: 111550076">
             </div>
             <div class="mb-6">
                 <label class="inline-flex items-center">
@@ -83,7 +83,16 @@
                     登入
                 </button>
             </div>
-        </form>
+        </form>        
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="mt-4">
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">{{ message }}</div>
+            {% endfor %}
+            </div>
+        {% endif %}
+        {% endwith %}
     </div>
 </body>
 
