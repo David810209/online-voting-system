@@ -30,10 +30,13 @@ def info():
     if request.method == 'POST':
         president_choice = request.form['president']
         vice_president_choice = request.form['vice_president']
+        print(president_choice, vice_president_choice)
         user_id = session.get('user_id')  # 從會話中獲取用戶 ID
         encrypted_president_choice = rsa_handler.encrypt(president_choice)
         encrypted_vice_president_choice = rsa_handler.encrypt(vice_president_choice)
+        print(encrypted_president_choice, encrypted_vice_president_choice)
         redis_handler.update_private_key(user_id, encrypted_president_choice, encrypted_vice_president_choice)
+        flash('投票成功', 'success')
    
 
     return render_template('info.html')
