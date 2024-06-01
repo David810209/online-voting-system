@@ -26,7 +26,7 @@ def login():
     return render_template('login.html')
 
 @app.route('/info', methods=['GET', 'POST'])
-def candidates():
+def info():
     if request.method == 'POST':
         president_choice = request.form['president']
         vice_president_choice = request.form['vice_president']
