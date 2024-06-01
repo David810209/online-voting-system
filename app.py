@@ -28,7 +28,7 @@ def login():
 
         if redis_handler.user_exists(user_id):
             flash('您已經投過票，不能重複投票！', 'danger')
-            return redirect(url_for('/'))
+            return redirect(url_for('login'))
         else:
             redis_handler.set_db(user_name, user_id)
             flash('新用戶創建成功', 'success')
