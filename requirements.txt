@@ -47,3 +47,4 @@ gunicorn
 redis
 cryptography
 flask_limiter
+flask-talisman
