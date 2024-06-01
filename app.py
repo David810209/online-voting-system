@@ -31,7 +31,6 @@ def login():
             return redirect(url_for('login'))
         else:
             redis_handler.set_db(user_name, user_id)
-            flash('新用戶創建成功', 'success')
 
         session['user_id'] = user_id  # 存儲用戶 ID 在會話中
         return redirect(url_for('info'))
