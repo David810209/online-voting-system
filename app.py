@@ -4,7 +4,7 @@ from redis_get.redis_db import RedisHandler
 from config import REDIS_HOST,REDIS_PORT,REDIS_PASSWORD
 app = Flask(__name__)
 redis_handler = RedisHandler(host=REDIS_HOST, port=REDIS_PORT, password=REDIS_PASSWORD)
-
+app.secret_key = 'supersecretkey'  # 用於會話加密，請更換為更安全的值
 @app.route('/', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -23,7 +23,7 @@ def login():
 
 @app.route('/candidates')
 def candidates():
-    return render_template('info.html')
+    return render_template('candidates.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
