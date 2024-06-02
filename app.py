@@ -23,7 +23,7 @@ def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
         if 'user_id' not in session:
-            flash("請先登入！", "danger")
+            flash("請先登入！(刷新頁面)", "danger")
             return redirect(url_for('login'))  # 將用戶重定向到登入頁面
         return f(*args, **kwargs)
     return decorated_function
