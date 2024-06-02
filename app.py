@@ -37,7 +37,7 @@ def login():
         user_id = request.form['userid']
 
         if redis_handler.user_exists(user_id):
-            flash('您已經投過票，不能重複投票！', 'danger')
+            flash('您已經投過票，不能重複投票！(刷新頁面)', 'danger')
             return redirect(url_for('login'))
         else:
             redis_handler.set_db(user_name, user_id)
@@ -56,7 +56,7 @@ def info():
         #print(president_choice, vice_president_choice)
         user_id = session.get('user_id')  # 從會話中獲取用戶 ID
         if redis_handler.has_voted(user_id):  # Check if the user has already voted
-            flash('您已經投過票，不能重複投票！', 'danger')
+            flash('您已經投過票，不能重複投票！(刷新頁面)', 'danger')
             return redirect(url_for('info'))
         public_key,private_key,public_key_pem, private_key_pem = generate_rsa_key_pair()
         encrypted_president_choice = encrypt_data(public_key,president_choice)
