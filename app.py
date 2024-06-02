@@ -48,6 +48,7 @@ def login():
     return render_template('login.html')
 
 @app.route('/info', methods=['GET', 'POST'])
+@login_required
 def info():
     if request.method == 'POST':
         president_choice = request.form['president']
@@ -102,6 +103,7 @@ def check():
                            vice_president_choice=decrypted_vice_president_choice)
     
 @app.route('/success')
+@login_required
 def success():
     user_id = session.get('user_id')
     
@@ -113,10 +115,12 @@ def success():
                            vice_president_choice=vice_president_choice)
         
 @app.route('/haha')
+@login_required
 def haha():
     return render_template('haha.html')
 
 @app.route('/logout')
+@login_required
 def logout():
     session.pop('user_id', None)  # 清除會話中的用戶 ID
     return redirect(url_for('login'))
