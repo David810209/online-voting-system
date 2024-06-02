@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session, flash
+from functools import wraps
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 #from flask_talisman import Talisman
@@ -17,6 +18,15 @@ limiter = Limiter(
     app=app,
     default_limits=["1000 per day", "300 per hour"]
 )
+
+def login_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if 'user_id' not in session:
+            flash("請先登入！", "warning")
+            return redirect(url_for('login'))  # 將用戶重定向到登入頁面
+        return f(*args, **kwargs)
+    return decorated_function
 
 app.secret_key = FLASK_SECRET_KEY  # 用於會話加密，請更換為更安全的值
 
@@ -44,6 +54,9 @@ def info():
         vice_president_choice = request.form['vice_president']
         #print(president_choice, vice_president_choice)
         user_id = session.get('user_id')  # 從會話中獲取用戶 ID
+        if redis_handler.has_voted(user_id):  # Check if the user has already voted
+            flash('您已經投過票，不能重複投票！', 'danger')
+            return redirect(url_for('info'))
         public_key,private_key,public_key_pem, private_key_pem = generate_rsa_key_pair()
         encrypted_president_choice = encrypt_data(public_key,president_choice)
         encrypted_vice_president_choice = encrypt_data(public_key,vice_president_choice)
@@ -102,6 +115,11 @@ def success():
 @app.route('/haha')
 def haha():
     return render_template('haha.html')
+
+@app.route('/logout')
+def logout():
+    session.pop('user_id', None)  # 清除會話中的用戶 ID
+    return redirect(url_for('login'))
 
 if __name__ == '__main__':
     app.run(debug=True)

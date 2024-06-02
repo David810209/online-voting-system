@@ -106,12 +106,20 @@
                 </select>
             </div>
             <div class="mt-6">
-                <button type="button" onclick="showConfirmation()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                <button id="submitButton" type="button" onclick="showConfirmation()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
                     提交
                 </button>
             </div>
         </form>
         <script>
+            
+            document.addEventListener('DOMContentLoaded', function() {
+                const messages = {{ get_flashed_messages(with_categories=true)|tojson }};
+                if (messages.some(([category, message]) => category === 'danger')) {
+                    document.getElementById('submitButton').disabled = true;  // Disable the button if there's a danger message
+                }
+            });
+
             function showConfirmation() {
                 const president = document.getElementById('president').value;
                 const vice_president = document.getElementById('vice_president').value;
@@ -127,6 +135,17 @@
                 }
             }
         </script>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="mb-4">
+                    {% for category, message in messages %}
+                        <div class="p-4 mb-4 text-sm {{ 'bg-red-500 text-white' if category == 'danger' else 'bg-green-500 text-white' }} rounded-lg" role="alert">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
     </div>
     
 

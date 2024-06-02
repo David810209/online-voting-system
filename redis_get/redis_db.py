@@ -8,13 +8,7 @@ class RedisHandler():
     def set_db(self,user_name,user_id):
         self.rds.hmset(f'voter:{user_id}',{
             "user_name":user_name,
-            'user_id':user_id,
-            'public_key':"",
-            "private_key":"",
-            "president":"",
-            "vice_president":"",
-            "president_text":"",
-            "vice_president_text":"",
+            'user_id':user_id
         })
         
     def get_user_name(self,user_id):
@@ -47,6 +41,9 @@ class RedisHandler():
         
     def user_exists(self, user_id):
         return self.rds.exists(f'voter:{user_id}')
+    
+    def has_voted(self, user_id):
+        return self.rds.hexists(f'voter:{user_id}', 'president')
     
     def update_vote(self, user_id, president_choice, vice_president_choice, president_text, vice_president_text):
         self.rds.hmset(f'voter:{user_id}', {

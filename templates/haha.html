@@ -10,9 +10,20 @@
             background-color: #16151d; /* 暗色背景 */
             color: #ffffff; /* 白色文字 */
         }
+        .logout-button {
+            background-color: #4a5568; /* 深灰色背景 */
+            color: #ffffff; /* 白色文字 */
+            padding: 8px 16px; /* 內邊距 */
+            border: none; /* 無邊框 */
+            border-radius: 8px; /* 圓角 */
+            cursor: pointer; /* 鼠標樣式 */
+            font-size: 16px; /* 文字大小 */
+            margin-top: 20px; /* 上邊距 */
+        }
     </style>
 </head>
 <body class="flex items-center justify-center min-h-screen">
     <img src="https://github.com/David810209/online-voting-system/blob/main/img/haha.jpg?raw=true" alt="描述性文字" class="max-w-full h-auto">
+    <button class="logout-button" onclick="window.location.href='/logout'">登出</button>
 </body>
 </html>
