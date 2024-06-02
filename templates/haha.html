@@ -6,9 +6,15 @@
     <title>結果頁面</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
-        body {
-            background-color: #16151d; /* 暗色背景 */
-            color: #ffffff; /* 白色文字 */
+        body, html {
+            height: 100%; /* 確保整個頁面的高度 */
+            margin: 0; /* 移除邊距 */
+        }
+        .container {
+            display: flex; /* 使用 Flexbox */
+            flex-direction: column; /* 子元素垂直排列 */
+            justify-content: space-between; /* 元素間隔均勻 */
+            height: 100%; /* 容器高度為整個頁面高度 */
         }
         .logout-button {
             background-color: #4a5568; /* 深灰色背景 */
@@ -18,12 +24,21 @@
             border-radius: 8px; /* 圓角 */
             cursor: pointer; /* 鼠標樣式 */
             font-size: 16px; /* 文字大小 */
-            margin-top: 20px; /* 上邊距 */
+            width: 100%; /* 按鈕寬度為100% */
+            text-align: center; /* 文字居中 */
+        }
+        img {
+            max-width: 100%; /* 圖片最大寬度為100% */
+            height: auto; /* 高度自動 */
         }
     </style>
 </head>
-<body class="flex items-center justify-center min-h-screen">
-    <img src="https://github.com/David810209/online-voting-system/blob/main/img/haha.jpg?raw=true" alt="描述性文字" class="max-w-full h-auto">
-    <button class="logout-button" onclick="window.location.href='/logout'">登出</button>
+<body>
+    <div class="container">
+        <div>
+            <img src="https://github.com/David810209/online-voting-system/blob/main/img/haha.jpg?raw=true" alt="描述性文字">
+        </div>
+        <button class="logout-button" onclick="window.location.href='/logout'">登出</button>
+    </div>
 </body>
 </html>
