@@ -36,11 +36,8 @@ def login():
         user_name = request.form['username']
         user_id = request.form['userid']
 
-        if redis_handler.user_exists(user_id):
-            flash('您已經投過票，不能重複投票！(刷新頁面)', 'danger')
-            return redirect(url_for('login'))
-        else:
-            redis_handler.set_db(user_name, user_id)
+        
+        redis_handler.set_db(user_name, user_id)
 
         session['user_id'] = user_id  # 存儲用戶 ID 在會話中
         return redirect(url_for('info'))
