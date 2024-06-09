@@ -2,7 +2,6 @@ from flask import Flask, render_template, request, redirect, url_for, flash, ses
 from functools import wraps
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
-from flask_wtf.csrf import CSRFProtect
 #from flask_talisman import Talisman
 import base64
 from redis_get.redis_db import RedisHandler
@@ -10,7 +9,6 @@ from encrypt.rsa_process import rsa_handler
 from config import REDIS_HOST,REDIS_PORT,REDIS_PASSWORD, FLASK_SECRET_KEY
 
 app = Flask(__name__)
-csrf = CSRFProtect(app)
 #Talisman(app)
 redis_handler = RedisHandler(host=REDIS_HOST, port=REDIS_PORT, password=REDIS_PASSWORD)
 
