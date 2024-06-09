@@ -6,11 +6,11 @@ import base64
 class rsa_handler():
     def __init__(self):
         with open("encrypt/public_key.pem", "rb") as key_file:
-            private_key = serialization.load_pem_private_key(
+            public_key = serialization.load_pem_public_key(
                 key_file.read(),
                 password=None,
             )
-        self.public_key=private_key
+        self.public_key=public_key
         
     # 加密函數
     def encrypt_data(self,data):
