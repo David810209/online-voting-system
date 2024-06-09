@@ -5,7 +5,7 @@ from flask_limiter.util import get_remote_address
 #from flask_talisman import Talisman
 import base64
 from redis_get.redis_db import RedisHandler
-from encrypt.rsa_process import rsa_handler
+from encrypt.rsa_process import RsaHandler
 from config import REDIS_HOST,REDIS_PORT,REDIS_PASSWORD, FLASK_SECRET_KEY
 
 app = Flask(__name__)
@@ -51,16 +51,19 @@ def info():
     if request.method == 'POST':
         president_choice = request.form['president']
         vice_president_choice = request.form['vice_president']
-        user_id = session.get('user_id')  # 從會話中獲取用戶 ID
-        if redis_handler.has_voted(user_id):  # Check if the user has already voted
-            flash('您已經投過票，不能重複投票！(刷新頁面)', 'danger')
+        user_id = session.get('user_id')  # 从会话中获取用户 ID
+        
+        if redis_handler.has_voted(user_id):  # 检查用户是否已经投票
+            flash('您已经投过票，不能重复投票！(刷新页面)', 'danger')
             return redirect(url_for('info'))
-        rsa = rsa_handler()
+
+        rsa = RsaHandler()
         encrypted_president_choice = rsa.encrypt_data(president_choice)
         encrypted_vice_president_choice = rsa.encrypt_data(vice_president_choice)
+        
         redis_handler.update_vote(user_id, encrypted_president_choice, encrypted_vice_president_choice)
         return redirect(url_for('success'))
-    return render_template('info.html')
+    
     
 @app.route('/success')
 @login_required
