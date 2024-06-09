@@ -30,25 +30,28 @@ def login_required(f):
 
 app.secret_key = FLASK_SECRET_KEY  # 用於會話加密，請更換為更安全的值
 
-@app.route('/', methods=['GET', 'POST'])
-def login():
-    if request.method == 'POST':
-        user_name = request.form['username']
-        user_id = request.form['userid']
+# @app.route('/', methods=['GET', 'POST'])
+# def login():
+#     if request.method == 'POST':
+#         user_name = request.form['username']
+#         user_id = request.form['userid']
 
         
-        redis_handler.set_db(user_name, user_id)
+#         redis_handler.set_db(user_name, user_id)
 
-        session['user_id'] = user_id  # 存儲用戶 ID 在會話中
-        return redirect(url_for('info'))
+#         session['user_id'] = user_id  # 存儲用戶 ID 在會話中
+#         return redirect(url_for('info'))
 
-    return render_template('login.html')
+#     return render_template('login.html')
+@app.route('/', methods=['GET', 'POST'])
+def index():
+    return render_template('index.html')
 
 @app.route('/info', methods=['GET', 'POST'])
 @login_required
 def info():
     if request.method == 'POST':
-        president_choice = request.form['president']
+        #president_choice = request.form['president']
         vice_president_choice = request.form['vice_president']
         #print(president_choice, vice_president_choice)
         user_id = session.get('user_id')  # 從會話中獲取用戶 ID
@@ -56,11 +59,12 @@ def info():
             flash('您已經投過票，不能重複投票！(刷新頁面)', 'danger')
             return redirect(url_for('info'))
         public_key,private_key,public_key_pem, private_key_pem = generate_rsa_key_pair()
-        encrypted_president_choice = encrypt_data(public_key,president_choice)
+        #encrypted_president_choice = encrypt_data(public_key,president_choice)
         encrypted_vice_president_choice = encrypt_data(public_key,vice_president_choice)
         #print(encrypted_president_choice, encrypted_vice_president_choice)
         redis_handler.store_key(user_id, public_key_pem, private_key_pem)
-        redis_handler.update_vote(user_id, encrypted_president_choice, encrypted_vice_president_choice, president_choice, vice_president_choice)
+        #redis_handler.update_vote(user_id, encrypted_president_choice, encrypted_vice_president_choice, president_choice, vice_president_choice)
+        redis_handler.update_vote_2(user_id, encrypted_vice_president_choice, vice_president_choice)
         return redirect(url_for('success'))
    
 
