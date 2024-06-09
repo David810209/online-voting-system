@@ -4,7 +4,7 @@ import base64
 
 
 class rsa_handler():
-    def __init__(self, public_key):
+    def __init__(self):
         with open("encrypt/public_key.pem", "rb") as key_file:
             private_key = serialization.load_pem_private_key(
                 key_file.read(),
