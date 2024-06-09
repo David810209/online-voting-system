@@ -48,3 +48,4 @@ redis
 cryptography
 flask_limiter
 flask-talisman
+flask_wtf
