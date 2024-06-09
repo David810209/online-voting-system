@@ -63,6 +63,8 @@ def info():
         
         redis_handler.update_vote(user_id, encrypted_president_choice, encrypted_vice_president_choice)
         return redirect(url_for('success'))
+
+    return render_template('info.html')
     
     
 @app.route('/success')
