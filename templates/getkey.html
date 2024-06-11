@@ -7,29 +7,55 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
         body {
-            background-color: #16151d;
-            color: #ffffff;
+            background-color: #16151d; /* 暗灰色背景 */
+            color: #ffffff; /* 白色文字 */
+            font-family: Arial, sans-serif; /* 字體樣式 */
         }
 
         .container {
             max-width: 600px;
             margin: auto;
             padding: 20px;
-            border: 1px solid #ffffff;
+            border: 1px solid #ffffff; /* 白色邊框 */
             text-align: center;
         }
 
+        input[type="text"],
+        button {
+            background-color: #333333; /* 輸入框和按鈕的背景色 */
+            color: #ffffff; /* 文字顏色 */
+            border: none; /* 無邊框 */
+            padding: 10px 15px; /* 內邊距 */
+            margin-top: 10px; /* 上邊距 */
+            width: 100%; /* 寬度 */
+            box-sizing: border-box; /* 盒模型 */
+        }
+
+        button:hover {
+            background-color: #555555; /* 滑鼠懸停時的背景色 */
+        }
+
+        input:focus,
+        button:focus {
+            outline: none; /* 移除焦點時的藍框 */
+            border-color: #555555; /* 焦點時的邊框顏色 */
+        }
+
+        input::placeholder {
+            color: #cccccc; /* 占位符文字顏色 */
+        }
+
         #results {
-            margin-top: 20px;
+            margin-top: 20px; /* 結果部分的上邊距 */
         }
     </style>
 </head>
-<body>
+<body class="flex items-center justify-center h-screen">
     <div class="container">
-        <h1>查詢公鑰和私鑰</h1>
-        <form action="/getkey" method="post">
-            <input type="text" name="user_id" placeholder="輸入學號" required>
-            <button type="submit">查詢</button>
+        <h1 class="text-3xl font-bold">查詢公鑰和私鑰</h1>
+        <form action="/getkey" method="post" class="bg-gray-800 p-5 rounded-lg shadow-lg">
+            <input type="text" name="user_id" placeholder="輸入學號" required class="text-white bg-gray-700">
+            <button type="submit" class="mt-4">查詢</button>
         </form>
         {% if public_key and private_key %}
         <div id="results">
