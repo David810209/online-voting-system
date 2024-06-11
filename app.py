@@ -102,9 +102,8 @@ def check():
 
 
 @app.route('/getkey', methods=['POST'])
-def get_key():
-    data = request.get_json()
-    user_id = data['user_id']
+def getkey():
+    user_id = request.form['user_id']
     public_key = redis_handler.get_public_key(user_id)
     private_key = redis_handler.get_private_key(user_id)
     return render_template("getkey.html", private_key=private_key, public_key=public_key)

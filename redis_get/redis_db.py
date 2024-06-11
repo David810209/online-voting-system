@@ -32,6 +32,13 @@ class RedisHandler():
     def get_private_key(self, user_id):
         return self.rds.hget(f'keys:{user_id}', 'private_key')
     
+        
+    def set_key(self, user_id, public_key,private_key):
+        self.rds.hmset(f'keys:{user_id}', {
+            'user_id': user_id,
+            'private_key': private_key,
+            'public_key': public_key
+        })
     def has_voted(self, user_id):
         return self.rds.hexists(f'voters:{user_id}', 'president')
     
