@@ -5,7 +5,7 @@ from flask_limiter.util import get_remote_address
 #from flask_talisman import Talisman
 import base64
 from redis_get.redis_db import RedisHandler
-from encrypt.rsa_process import encrypt_data, decrypt_data, load_private_key, load_public_key
+from encrypt.rsa_process import encrypt_data, decrypt_data
 from config import REDIS_HOST,REDIS_PORT,REDIS_PASSWORD, FLASK_SECRET_KEY
 
 app = Flask(__name__)
@@ -101,7 +101,7 @@ def check():
 
 
 
-@app.route('/get_key', methods=['POST'])
+@app.route('/getkey', methods=['POST'])
 def get_key():
     data = request.get_json()
     user_id = data['user_id']
