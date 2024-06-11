@@ -77,7 +77,7 @@ def info():
             redis_handler.update_vote(user_id, encrypted_president_choice, encrypted_vice_president_choice)
             return redirect(url_for('success'))
         except Exception as e:
-            flash("public key格式錯誤(刷新頁面)", "danger")
+            flash("public key格式錯誤", "danger")
             return render_template("info.html")
 
     return render_template('info.html')
@@ -96,7 +96,7 @@ def check():
         encrypted_vice_president_choice_b64 = redis_handler.get_vice_president_encrypted(user_id)
 
         if not encrypted_president_choice_b64 or not encrypted_vice_president_choice_b64:
-            flash('沒有可顯示的結果(刷新頁面)', 'error')
+            flash('沒有可顯示的結果', 'error')
             return redirect(url_for('check'))
 
         encrypted_president_choice = base64.b64decode(encrypted_president_choice_b64)
@@ -106,7 +106,7 @@ def check():
         decrypted_president_choice = decrypt_data(encrypted_president_choice,private_key_pem)
         decrypted_vice_president_choice = decrypt_data(encrypted_vice_president_choice,private_key_pem)
         if decrypted_president_choice is None or decrypted_vice_president_choice is None:
-            flash('您沒有投票資格或您的私鑰無效。(刷新頁面)', 'error')
+            flash('您沒有投票資格或您的私鑰無效。', 'error')
             return redirect(url_for('check'))
     return render_template('check.html', 
                            president_choice=decrypted_president_choice, 
@@ -123,11 +123,11 @@ def getkey():
                 public_key = redis_handler.get_public_key(user_id)
                 private_key = redis_handler.get_private_key(user_id)
             else:
-                flash('找不到指定的用戶(刷新頁面)', 'error')
+                flash('找不到指定的用戶', 'error')
                 return render_template("getkey.html")
             return render_template("getkey.html", private_key=private_key, public_key=public_key, user_id=user_id)
         except Exception as e:
-            flash("user id格式錯誤(刷新頁面)", "danger")
+            flash("user id格式錯誤", "danger")
             return render_template("getkey.html")
     else:
         # 處理 GET 請求的邏輯
