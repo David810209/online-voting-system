@@ -35,8 +35,9 @@ def login():
     if request.method == 'POST':
         user_name = request.form['username']
         user_id = request.form['userid']
-        redis_handler.set_db(user_name, user_id)
-
+        if not redis_handler.user_exists(user_id):
+            redis_handler.set_db(user_name, user_id)
+            
         session['user_id'] = user_id  # 存儲用戶 ID 在會話中
         return redirect(url_for('select'))
 
@@ -57,7 +58,7 @@ def info():
         president_choice = request.form['president']
         vice_president_choice = request.form['vice_president']
         public_key = request.form['public_key']
-        user_id = session.get('user_id')  # 从会话中获取用户 ID
+        user_id = session.get('user_id')  
         
         if redis_handler.has_voted(user_id):  # 检查用户是否已经投票
             flash('您已经投过票，不能重复投票！(刷新页面)', 'danger')
@@ -78,7 +79,7 @@ def check():
     decrypted_vice_president_choice = None
 
     if request.method == 'POST':
-        user_id = request.form['user_id']
+        user_id = session.get('user_id') 
         private_key_pem = request.form['private_key']
 
         encrypted_president_choice_b64 = redis_handler.get_president_encrypted(user_id)
@@ -94,7 +95,9 @@ def check():
         # 解密用戶選擇
         decrypted_president_choice = decrypt_data(encrypted_president_choice,private_key_pem)
         decrypted_vice_president_choice = decrypt_data(encrypted_vice_president_choice,private_key_pem)
-
+        if decrypted_president_choice is None or decrypted_vice_president_choice is None:
+            flash('您沒有投票資格或您的私鑰無效。', 'error')
+            return redirect(url_for('check'))
     return render_template('check.html', 
                            president_choice=decrypted_president_choice, 
                            vice_president_choice=decrypted_vice_president_choice)

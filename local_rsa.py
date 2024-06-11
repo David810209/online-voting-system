@@ -23,7 +23,7 @@ def generate_rsa_key_pair():
                 encoding=serialization.Encoding.PEM,
                 format=serialization.PrivateFormat.PKCS8,
                 encryption_algorithm=serialization.NoEncryption()
-            )
+             )
         )
         
     with open("public_key.pem", "wb") as f:

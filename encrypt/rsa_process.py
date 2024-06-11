@@ -17,8 +17,7 @@ def encrypt_data(data,public_key_pem):
     )
     return base64.b64encode(encrypted_data).decode('utf-8')
 
-def decrypt_data(ciphertext,private_key_pem):
-    
+def decrypt_data(ciphertext, private_key_pem):
     if not isinstance(ciphertext, bytes):
         raise TypeError("Ciphertext must be bytes.")
     
@@ -35,10 +34,11 @@ def decrypt_data(ciphertext,private_key_pem):
                 label=None
             )
         )
-        return decrypted_data
+        return decrypted_data.decode('utf-8')
     except ValueError as e:
         print(f"Error decrypting data: {e}")
-        raise
+        return None  # 返回 None 表示解密失敗
     except Exception as e:
         print(f"Unexpected error during decryption: {e}")
-        raise
+        return None  # 返回 None 表示解密失敗
+

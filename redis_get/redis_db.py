@@ -55,3 +55,4 @@ class RedisHandler():
         return self.rds.hgetall(f'voters:{user_id}')
         
    
+   

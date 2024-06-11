@@ -19,7 +19,7 @@ voters = redis_handler.get_all_voters()
 results = []
 president_votes = {}
 vice_president_votes = {}
-
+ 
 def load_private_key(filepath):
     with open(filepath, "rb") as key_file:
         private_key = serialization.load_pem_private_key(
