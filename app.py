@@ -47,6 +47,7 @@ def login():
             
         session['user_id'] = user_id  # 存儲用戶 ID 在會話中
         return redirect(url_for('select'))
+    
     return render_template('login.html')
 
 @app.route('/select', methods=['GET', 'POST'])
