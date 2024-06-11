@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>學號查詢</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #16151d;
+            color: #ffffff;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ffffff;
+            text-align: center;
+        }
+
+        #results {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>查詢公鑰和私鑰</h1>
+        <form action="/get_key" method="post">
+            <input type="text" name="user_id" placeholder="輸入學號" value="{{ user_id }}" required>
+            <button type="submit">查詢</button>
+        </form>
+        {% if public_key and private_key %}
+        <div id="results">
+            <p>公鑰: {{ public_key }}</p>
+            <p>私鑰: {{ private_key }}</p>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>

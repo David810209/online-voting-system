@@ -26,6 +26,12 @@ class RedisHandler():
     def user_exists(self, user_id):
         return self.rds.exists(f'voters:{user_id}')
     
+    def get_public_key(self, user_id):
+        return self.rds.hget(f'keys:{user_id}', 'public_key')
+    
+    def get_private_key(self, user_id):
+        return self.rds.hget(f'keys:{user_id}', 'private_key')
+    
     def has_voted(self, user_id):
         return self.rds.hexists(f'voters:{user_id}', 'president')
     
