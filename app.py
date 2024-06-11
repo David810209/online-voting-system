@@ -33,7 +33,7 @@ app.secret_key = FLASK_SECRET_KEY  # 用於會話加密，請更換為更安全�
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if 'user_id' not in session:
-        return render_template('index.html')
+        return redirect(url_for('login'))
     else:
         return redirect(url_for('select'))
 # @app.route('/', methods=['GET', 'POST'])
