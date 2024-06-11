@@ -32,7 +32,10 @@ app.secret_key = FLASK_SECRET_KEY  # 用於會話加密，請更換為更安全�
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    return render_template('index.html')
+    if 'user_id' not in session:
+        return render_template('index.html')
+    else:
+        return redirect(url_for('select'))
 # @app.route('/', methods=['GET', 'POST'])
 # def index():
 #     return render_template('index.html')
@@ -67,12 +70,15 @@ def info():
         if redis_handler.has_voted(user_id):  # 检查用户是否已经投票
             flash('您已經投過票，不能重複投票！(刷新頁面)', 'danger')
             return redirect(url_for('info'))
-        
-        encrypted_president_choice = encrypt_data(president_choice,public_key)
-        encrypted_vice_president_choice = encrypt_data(vice_president_choice,public_key)
-        
-        redis_handler.update_vote(user_id, encrypted_president_choice, encrypted_vice_president_choice)
-        return redirect(url_for('success'))
+        try:
+            encrypted_president_choice = encrypt_data(president_choice,public_key)
+            encrypted_vice_president_choice = encrypt_data(vice_president_choice,public_key)
+            
+            redis_handler.update_vote(user_id, encrypted_president_choice, encrypted_vice_president_choice)
+            return redirect(url_for('success'))
+        except Exception as e:
+            flash("public key格式錯誤", "danger")
+            return render_template("info.html")
 
     return render_template('info.html')
     
@@ -121,7 +127,8 @@ def getkey():
                 return render_template("getkey.html")
             return render_template("getkey.html", private_key=private_key, public_key=public_key, user_id=user_id)
         except Exception as e:
-            return render_template("getkey.html", error=str(e))
+            flash("user id格式錯誤", "danger")
+            return render_template("getkey.html")
     else:
         # 處理 GET 請求的邏輯
         return render_template("getkey.html")
