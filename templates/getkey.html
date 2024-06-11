@@ -10,6 +10,9 @@
             background-color: #16151d; /* 暗灰色背景 */
             color: #ffffff; /* 白色文字 */
             font-family: Arial, sans-serif; /* 字體樣式 */
+            position: relative;
+            margin: 0;
+            padding: 0;
         }
         .container {
             max-width: 600px;
@@ -37,6 +40,14 @@
         input::placeholder {
             color: #cccccc; /* 占位符文字顏色 */
         }
+        .top-right-links {
+            position: fixed;
+            right: 10px;
+            top: 10px;
+        }
+        .top-right-links button {
+            margin-left: 10px; /* 在按鈕之間添加空間 */
+        }
         #results {
             margin-top: 20px; /* 結果部分的上邊距 */
         }
@@ -44,6 +55,7 @@
             color: transparent;
             text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
         }
+        #back
     </style>
 </head>
 <body class="flex items-center justify-center h-screen">
@@ -63,8 +75,8 @@
             <p>{{ error }}</p>
         </div>
         {% endif %}
-        <button onclick="window.location.href='/info'">我要投票</button>
     </div>
+    <div id="back-to-top" onclick="scrollToTop()">回到頁面頂部</div>
     <script>
         function copyToClipboard(id) {
             const text = document.getElementById(id).textContent;
@@ -73,6 +85,9 @@
             }).catch(err => {
                 alert('複製失敗');
             });
+        }
+        function scrollToTop() {
+            window.scrollTo({top: 0, behavior: 'smooth'});
         }
     </script>
 </body>
