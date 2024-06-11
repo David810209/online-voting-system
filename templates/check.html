@@ -14,9 +14,22 @@
             background-color: #2a2a2a; /* 暗灰色背景 */
             border: 1px solid #ffffff; /* 白色邊框 */
         }
+        #back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 10px 15px;
+            background-color: #333333;
+            color: #ffffff;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body class="flex items-center justify-center min-h-screen">
+    <div class="top-right-links">
+        <button onclick="window.location.href='/'">返回首頁</button>
+        <button onclick="window.location.href='/logout'">登出</button>
+    </div>
     <div class="w-full max-w-lg p-5">
         <h1 class="text-3xl font-bold text-center mb-6">解密投票選項</h1>
         {% with messages = get_flashed_messages(with_categories=true) %}

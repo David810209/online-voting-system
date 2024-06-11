@@ -19,6 +19,15 @@
             height: 100px; /* 固定圖片高度 */
             object-fit: cover; /* 確保圖片覆蓋整個元素，不變形 */
         }
+        #back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 10px 15px;
+            background-color: #333333;
+            color: #ffffff;
+            cursor: pointer;
+        }
     </style>
     <script>
         function showConfirmation() {
@@ -39,6 +48,10 @@
     </script>
 </head>
 <body class="flex items-center justify-center min-h-screen">
+    <div class="top-right-links">
+        <button onclick="window.location.href='/'">返回首頁</button>
+        <button onclick="window.location.href='/logout'">登出</button>
+    </div>
     <div class="w-full max-w-4xl p-5">
         <h1 class="text-3xl font-bold text-center mb-6">候選人資訊</h1>
         <div class="flex flex-col space-y-4 ">
