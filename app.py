@@ -31,6 +31,13 @@ def login_required(f):
 app.secret_key = FLASK_SECRET_KEY  # 用於會話加密，請更換為更安全的值
 
 @app.route('/', methods=['GET', 'POST'])
+def index():
+    return render_template('index.html')
+# @app.route('/', methods=['GET', 'POST'])
+# def index():
+#     return render_template('index.html')
+
+@app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
         user_name = request.form['username']
@@ -40,11 +47,6 @@ def login():
             
         session['user_id'] = user_id  # 存儲用戶 ID 在會話中
         return redirect(url_for('select'))
-
-    return render_template('login.html')
-# @app.route('/', methods=['GET', 'POST'])
-# def index():
-#     return render_template('index.html')
 
 @app.route('/select', methods=['GET', 'POST'])
 @login_required
@@ -109,11 +111,12 @@ def getkey():
     if request.method == 'POST':
         user_id = request.form['user_id']
         try:
-            public_key = redis_handler.get_public_key(user_id)
-            private_key = redis_handler.get_private_key(user_id)
-            if not public_key or not private_key:
-                error_message = "找不到指定的鍵"
-                return render_template("getkey.html", error=error_message)
+            if redis_handler.user_exists(user_id):
+                public_key = redis_handler.get_public_key(user_id)
+                private_key = redis_handler.get_private_key(user_id)
+            else:
+                flash('找不到指定的用戶', 'error')
+                return render_template("getkey.html")
             return render_template("getkey.html", private_key=private_key, public_key=public_key, user_id=user_id)
         except Exception as e:
             return render_template("getkey.html", error=str(e))

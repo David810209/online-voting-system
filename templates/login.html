@@ -12,12 +12,6 @@
             background-color: #16151d;
             /* 暗灰色背景，稍微亮一點 */
         }
-        .container {
-            max-width: 600px;
-            margin: 50px auto;
-            padding: 20px;
-            border: 1px solid #ffffff;
-        }
   
         .custom-form {
             background-color: #16151d;
@@ -86,9 +80,6 @@
                 </button>
             </div>
         </form>
-        <div class="container">
-            <a href="/getkey" class="btn">取得投票金鑰</a>
-        </div>
         <script>
             document.addEventListener('DOMContentLoaded', function() {
                 const messages = {{ get_flashed_messages(with_categories=true)|tojson }};

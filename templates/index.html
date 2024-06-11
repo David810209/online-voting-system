@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2024南友會正副會長投票系統</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #16151d;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #ffffff;
+            text-align: center;
+        }
+        button {
+            background-color: #333333;
+            color: #ffffff;
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #555555;
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center h-screen">
+    <div class="w-full max-w-md">
+        <div class="flex justify-center mb-4">
+            <img src="https://github.com/David810209/online-voting-system/blob/main/img/love.JPG?raw=true" alt="Image Description" class="max-w-full h-auto rounded-lg">
+        </div>
+        <h1 class="text-3xl text-white font-bold text-center mb-4">2024南友會正副會長投票系統</h1>
+        <div class="container">
+            <button onclick="location.href='/login'">登入</button>
+            <button onclick="location.href='/getkey'">取得投票金鑰</button>
+        </div>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const messages = {{ get_flashed_messages(with_categories=true)|tojson }};
+                if (messages.some(([category, message]) => category === 'danger')) {
+                    document.querySelectorAll('button').forEach(btn => btn.disabled = true);
+                }
+            });
+        </script>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="mb-4">
+                    {% for category, message in messages %}
+                        <div class="p-4 mb-4 text-sm {{ 'bg-red-500 text-white' if category == 'danger' else 'bg-green-500 text-white' }} rounded-lg" role="alert">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+    </div>
+</body>
+</html>
