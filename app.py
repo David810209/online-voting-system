@@ -104,10 +104,16 @@ def check():
 @app.route('/getkey', methods=['POST'])
 def getkey():
     user_id = request.form['user_id']
-    public_key = redis_handler.get_public_key(user_id)
-    private_key = redis_handler.get_private_key(user_id)
-    return render_template("getkey.html", private_key=private_key, public_key=public_key)
-
+    try:
+        public_key = redis_handler.get_public_key(user_id)
+        private_key = redis_handler.get_private_key(user_id)
+        if not public_key or not private_key:
+            error_message = "找不到指定的鍵"
+            return render_template("getkey.html", error=error_message)
+        return render_template("getkey.html", private_key=private_key, public_key=public_key, user_id=user_id)
+    except Exception as e:
+        return render_template("getkey.html", error=str(e))
+    
 @app.route('/success')
 @login_required
 def success():

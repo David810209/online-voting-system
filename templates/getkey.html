@@ -28,13 +28,17 @@
     <div class="container">
         <h1>查詢公鑰和私鑰</h1>
         <form action="/getkey" method="post">
-            <input type="text" name="user_id" placeholder="輸入學號" value="{{ user_id }}" required>
+            <input type="text" name="user_id" placeholder="輸入學號" required>
             <button type="submit">查詢</button>
         </form>
         {% if public_key and private_key %}
         <div id="results">
             <p>公鑰: {{ public_key }}</p>
             <p>私鑰: {{ private_key }}</p>
+        </div>
+        {% elif error %}
+        <div id="results">
+            <p>{{ error }}</p>
         </div>
         {% endif %}
     </div>
