@@ -107,7 +107,7 @@ def get_key():
     user_id = data['user_id']
     public_key = redis_handler.get_public_key(user_id)
     private_key = redis_handler.get_private_key(user_id)
-    return render_template("get_key.html", private_key=private_key, public_key=public_key)
+    return render_template("getkey.html", private_key=private_key, public_key=public_key)
 
 @app.route('/success')
 @login_required
