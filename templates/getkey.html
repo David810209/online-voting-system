@@ -11,7 +11,6 @@
             color: #ffffff; /* 白色文字 */
             font-family: Arial, sans-serif; /* 字體樣式 */
         }
-
         .container {
             max-width: 600px;
             margin: auto;
@@ -19,9 +18,7 @@
             border: 1px solid #ffffff; /* 白色邊框 */
             text-align: center;
         }
-
-        input[type="text"],
-        button {
+        input[type="text"], button {
             background-color: #333333; /* 輸入框和按鈕的背景色 */
             color: #ffffff; /* 文字顏色 */
             border: none; /* 無邊框 */
@@ -30,23 +27,22 @@
             width: 100%; /* 寬度 */
             box-sizing: border-box; /* 盒模型 */
         }
-
         button:hover {
             background-color: #555555; /* 滑鼠懸停時的背景色 */
         }
-
-        input:focus,
-        button:focus {
+        input:focus, button:focus {
             outline: none; /* 移除焦點時的藍框 */
             border-color: #555555; /* 焦點時的邊框顏色 */
         }
-
         input::placeholder {
             color: #cccccc; /* 占位符文字顏色 */
         }
-
         #results {
             margin-top: 20px; /* 結果部分的上邊距 */
+        }
+        .hide-content {
+            color: transparent;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
         }
     </style>
 </head>
@@ -59,15 +55,25 @@
         </form>
         {% if public_key and private_key %}
         <div id="results">
-            <p>公鑰: {{ public_key }}</p>
-            <p>私鑰: {{ private_key }}</p>
+            <p>公鑰: <span id="public_key" class="hide-content">{{ public_key }}</span> <button onclick="copyToClipboard('public_key')">複製公鑰</button></p>
+            <p>私鑰: <span id="private_key" class="hide-content">{{ private_key }}</span> <button onclick="copyToClipboard('private_key')">複製私鑰</button></p>
         </div>
         {% elif error %}
         <div id="results">
             <p>{{ error }}</p>
         </div>
         {% endif %}
+        <button onclick="window.location.href='/info'">我要投票</button>
     </div>
+    <script>
+        function copyToClipboard(id) {
+            const text = document.getElementById(id).textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                alert('已複製到剪貼簿');
+            }).catch(err => {
+                alert('複製失敗');
+            });
+        }
+    </script>
 </body>
 </html>
- 
