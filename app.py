@@ -5,7 +5,7 @@ from flask_limiter.util import get_remote_address
 #from flask_talisman import Talisman
 import base64
 from redis_get.redis_db import RedisHandler
-from encrypt.rsa_process import RsaHandler
+from encrypt.rsa_process import encrypt_data, decrypt_data, load_private_key, load_public_key
 from config import REDIS_HOST,REDIS_PORT,REDIS_PASSWORD, FLASK_SECRET_KEY
 
 app = Flask(__name__)
@@ -38,12 +38,17 @@ def login():
         redis_handler.set_db(user_name, user_id)
 
         session['user_id'] = user_id  # 存儲用戶 ID 在會話中
-        return redirect(url_for('info'))
+        return redirect(url_for('select'))
 
     return render_template('login.html')
 # @app.route('/', methods=['GET', 'POST'])
 # def index():
 #     return render_template('index.html')
+
+@app.route('/select', methods=['GET', 'POST'])
+@login_required
+def select():
+    return render_template('select.html')
 
 @app.route('/info', methods=['GET', 'POST'])
 @login_required
@@ -51,15 +56,15 @@ def info():
     if request.method == 'POST':
         president_choice = request.form['president']
         vice_president_choice = request.form['vice_president']
+        public_key = request.form['public_key']
         user_id = session.get('user_id')  # 从会话中获取用户 ID
         
         if redis_handler.has_voted(user_id):  # 检查用户是否已经投票
             flash('您已经投过票，不能重复投票！(刷新页面)', 'danger')
             return redirect(url_for('info'))
-
-        rsa = RsaHandler()
-        encrypted_president_choice = rsa.encrypt_data(president_choice)
-        encrypted_vice_president_choice = rsa.encrypt_data(vice_president_choice)
+        
+        encrypted_president_choice = encrypt_data(president_choice,public_key)
+        encrypted_vice_president_choice = encrypt_data(vice_president_choice,public_key)
         
         redis_handler.update_vote(user_id, encrypted_president_choice, encrypted_vice_president_choice)
         return redirect(url_for('success'))
@@ -67,6 +72,37 @@ def info():
     return render_template('info.html')
     
     
+@app.route('/check', methods=['GET', 'POST'])
+def check():
+    decrypted_president_choice = None
+    decrypted_vice_president_choice = None
+
+    if request.method == 'POST':
+        user_id = request.form['user_id']
+        private_key_pem = request.form['private_key']
+
+        encrypted_president_choice_b64 = redis_handler.get_president_encrypted(user_id)
+        encrypted_vice_president_choice_b64 = redis_handler.get_vice_president_encrypted(user_id)
+
+        if not encrypted_president_choice_b64 or not encrypted_vice_president_choice_b64:
+            flash('沒有可顯示的結果', 'error')
+            return redirect(url_for('check'))
+
+        encrypted_president_choice = base64.b64decode(encrypted_president_choice_b64)
+        encrypted_vice_president_choice = base64.b64decode(encrypted_vice_president_choice_b64)
+
+        # 解密用戶選擇
+        decrypted_president_choice = decrypt_data(encrypted_president_choice,private_key_pem)
+        decrypted_vice_president_choice = decrypt_data(encrypted_vice_president_choice,private_key_pem)
+
+    return render_template('check.html', 
+                           president_choice=decrypted_president_choice, 
+                           vice_president_choice=decrypted_vice_president_choice)
+
+
+
+
+
 @app.route('/success')
 @login_required
 def success():
