@@ -65,7 +65,7 @@ def info():
         user_id = session.get('user_id')  
         
         if redis_handler.has_voted(user_id):  # 检查用户是否已经投票
-            flash('您已经投过票，不能重复投票！(刷新页面)', 'danger')
+            flash('您已經投過票，不能重複投票！(刷新頁面)', 'danger')
             return redirect(url_for('info'))
         
         encrypted_president_choice = encrypt_data(president_choice,public_key)
