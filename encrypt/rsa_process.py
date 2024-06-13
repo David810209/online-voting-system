@@ -37,8 +37,8 @@ def decrypt_data(ciphertext, private_key_pem):
         return decrypted_data.decode('utf-8')
     except ValueError as e:
         print(f"Error decrypting data: {e}")
-        return None  # 返回 None 表示解密失敗
+        return None 
     except Exception as e:
         print(f"Unexpected error during decryption: {e}")
-        return None  # 返回 None 表示解密失敗
+        return None
 
