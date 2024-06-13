@@ -50,7 +50,6 @@
     <div class="container">
         <h1 class="text-3xl font-bold">查詢公鑰和私鑰</h1>
         <form action="/getkey" method="post" class="bg-gray-800 p-5 rounded-lg shadow-lg">
-            <input type="text" name="user_id" placeholder="輸入學號" required class="text-white bg-gray-700">
             <button type="submit" class="mt-4">查詢</button>
         </form>
         {% if public_key and private_key %}

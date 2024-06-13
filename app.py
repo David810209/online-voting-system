@@ -117,7 +117,7 @@ def check():
 @app.route('/getkey', methods=['GET', 'POST'])
 def getkey():
     if request.method == 'POST':
-        user_id = request.form['user_id']
+        user_id = session.get('user_id')
         try:
             if redis_handler.user_exists(user_id):
                 public_key = redis_handler.get_public_key(user_id)
