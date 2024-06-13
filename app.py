@@ -84,6 +84,7 @@ def info():
     
     
 @app.route('/check', methods=['GET', 'POST'])
+@login_required
 def check():
     decrypted_president_choice = None
     decrypted_vice_president_choice = None
@@ -115,6 +116,7 @@ def check():
 
 
 @app.route('/getkey', methods=['GET', 'POST'])
+@login_required
 def getkey():
     if request.method == 'POST':
         user_id = session.get('user_id')
