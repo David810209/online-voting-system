@@ -55,8 +55,8 @@
         </form>
         {% if public_key and private_key %}
         <div id="results">
-            <p>公鑰: <span id="public_key" class="hide-content">{{ public_key }}</span> <button onclick="copyToClipboard('public_key')">複製公鑰</button></p>
-            <p>私鑰: <span id="private_key" class="hide-content">{{ private_key }}</span> <button onclick="copyToClipboard('private_key')">複製私鑰</button></p>
+            <p>公鑰: <span id="public_key" class="hide-content">{{ public_key }}</span> <button onclick="copyToClipboard('public_key')">複製公鑰(投票加密)</button></p>
+            <p>私鑰: <span id="private_key" class="hide-content">{{ private_key }}</span> <button onclick="copyToClipboard('private_key')">複製私鑰(解密查詢)</button></p>
         </div>
         {% elif error %}
         <div id="results">
