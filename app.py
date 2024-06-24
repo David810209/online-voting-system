@@ -7,7 +7,7 @@ import base64
 from redis_get.redis_db import RedisHandler
 from encrypt.rsa_process import encrypt_data, decrypt_data
 from config import REDIS_HOST,REDIS_PORT,REDIS_PASSWORD, FLASK_SECRET_KEY
-
+ 
 app = Flask(__name__)
 #Talisman(app)
 redis_handler = RedisHandler(host=REDIS_HOST, port=REDIS_PORT, password=REDIS_PASSWORD)
